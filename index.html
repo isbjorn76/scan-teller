@@ -1,1 +1,40 @@
-Hello, World
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Waarschuwing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: red;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Waarschuwing!</h1>
+    <p>Pas op waar je op scant. Barcodes kunnen je naar gevaarlijke websites leiden.</p>
+    <p>Aantal keren gescand: <span id="scan-count">Laden...</span></p>
+
+    <script>
+        // Ophalen van het aantal keren dat de pagina is gescand
+        fetch('https://<jouw-server-url>/api/scan-count')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('scan-count').innerText = data.count;
+            })
+            .catch(error => {
+                document.getElementById('scan-count').innerText = 'Error bij laden.';
+                console.error(error);
+            });
+    </script>
+</body>
+</html>
+
